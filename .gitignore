@@ -1,0 +1,10 @@
+config/backup.conf
+backups/*
+!backups/.gitkeep
+logs/*
+!logs/.gitkeep
+reportes/*
+!reportes/.gitkeep
+*.tar.gz
+*.sha256
+*.log
