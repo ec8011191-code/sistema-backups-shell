@@ -1,0 +1,8 @@
+# Copie este archivo como config/backup.conf y ajuste las rutas.
+ORIGEN="/home/usuario/datos-empresa"
+DESTINO="/home/usuario/sistema-backups-shell/backups"
+LOG="/home/usuario/sistema-backups-shell/logs/backup.log"
+REPORTES="/home/usuario/sistema-backups-shell/reportes"
+RETENCION_DIAS=7
+CORREO_DESTINO="correo@ejemplo.com"
+ENVIAR_CORREO="no"
