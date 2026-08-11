@@ -13,7 +13,7 @@ pausar() {
 
 configurar() {
     local nombre origen destino correo
-    printf '\nCONFIGURACIÃ“N DEL SISTEMA\n=========================\n'
+    printf '\nCONFIGURACION DEL SISTEMA\n=========================\n'
     read -rp "Nombre del operador: " nombre
     [[ -n "$nombre" ]] || { printf 'ERROR: ingrese un nombre.\n'; return 1; }
 
@@ -41,7 +41,7 @@ CORREO_DESTINO="$correo"
 ENVIAR_CORREO="no"
 OPERADOR="$nombre"
 EOF
-    printf 'ConfiguraciÃ³n guardada correctamente.\n'
+    printf 'Configuracion guardada correctamente.\n'
 }
 
 ejecutar_respaldo() {
@@ -95,9 +95,9 @@ main() {
         printf 'SISTEMA INTERACTIVO DE COPIAS DE SEGURIDAD\n'
         printf '==========================================\n'
         printf '1. Configurar sistema\n2. Ejecutar respaldo\n3. Listar respaldos\n'
-        printf '4. Verificar Ãºltimo respaldo\n5. Mostrar Ãºltimo reporte\n'
+        printf '4. Verificar Ultimo respaldo\n5. Mostrar Ultimo reporte\n'
         printf '6. Mostrar log\n7. Salir\n\n'
-        read -rp "Seleccione una opciÃ³n [1-7]: " opcion
+        read -rp "Seleccione una opcion [1-7]: " opcion
         case "$opcion" in
             1) configurar || true; pausar ;;
             2) ejecutar_respaldo || true; pausar ;;
@@ -106,7 +106,7 @@ main() {
             5) mostrar_reporte || true; pausar ;;
             6) mostrar_log || true; pausar ;;
             7) printf 'Programa finalizado.\n'; break ;;
-            *) printf 'ERROR: opciÃ³n invÃ¡lida.\n'; pausar ;;
+            *) printf 'ERROR: opcion invalida.\n'; pausar ;;
         esac
     done
 }
