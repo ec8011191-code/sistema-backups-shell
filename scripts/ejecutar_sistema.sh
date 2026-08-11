@@ -2,21 +2,25 @@
 set -Eeuo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # shellcheck source=lib.sh
 source "$SCRIPT_DIR/lib.sh"
 
 main() {
     cargar_configuracion
+
     local inicio fin duracion archivo reporte
+
     inicio="$(date +%s)"
     registrar INFO "Inicio del sistema de respaldos"
 
-    if ! archivo="$($SCRIPT_DIR/crear_backup.sh)"; then
-        registrar ERROR "El sistema terminÃ³ durante la creaciÃ³n del respaldo"
+    if ! archivo="$("$SCRIPT_DIR/crear_backup.sh")"; then
+        registrar ERROR "El sistema terminó durante la creación del respaldo"
         return 10
     fi
+
     if ! "$SCRIPT_DIR/verificar_backup.sh" "$archivo" >/dev/null; then
-        registrar ERROR "El sistema terminÃ³ durante la verificaciÃ³n"
+        registrar ERROR "El sistema terminó durante la verificación"
         return 11
     fi
 
@@ -26,8 +30,15 @@ main() {
 
     fin="$(date +%s)"
     duracion="$((fin - inicio))"
-    reporte="$($SCRIPT_DIR/generar_reporte.sh "$archivo" "EXITOSO" "$duracion")"
+
+    if ! reporte="$("$SCRIPT_DIR/generar_reporte.sh" \
+        "$archivo" "EXITOSO" "$duracion")"; then
+        registrar ERROR "El sistema terminó durante la generación del reporte"
+        return 12
+    fi
+
     registrar INFO "Sistema finalizado correctamente. Reporte: $reporte"
+
     printf 'Respaldo: %s\nReporte: %s\n' "$archivo" "$reporte"
 }
 
